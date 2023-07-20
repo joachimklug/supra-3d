@@ -20,6 +20,8 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "react"],
-  "rules": {},
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"]
+  },
   "ignorePatterns": ["metro.config.js"]
 }
