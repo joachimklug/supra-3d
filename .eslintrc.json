@@ -23,5 +23,5 @@
   "rules": {
     "comma-dangle": ["error", "always-multiline"]
   },
-  "ignorePatterns": ["metro.config.js"]
+  "ignorePatterns": ["metro.config.js", "components"]
 }
