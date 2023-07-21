@@ -1,8 +1,7 @@
+import { defaultNavDark, defaultNavLight, defaultTextDark, defaultTextLight } from "@/supra-components/Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
-
-import Colors from "@/constants/Colors";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -17,7 +16,11 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: colorScheme === "light" ? defaultTextDark : defaultTextLight,
+        tabBarActiveBackgroundColor: colorScheme === "light" ? defaultNavLight : defaultNavDark,
+        tabBarInactiveBackgroundColor: colorScheme === "light" ? defaultNavLight : defaultNavDark,
+        headerStyle: { backgroundColor: colorScheme === "light" ? defaultNavLight : defaultNavDark },
+        headerTintColor: colorScheme === "light" ? defaultTextDark : defaultTextLight,
       }}
     >
       <Tabs.Screen
@@ -32,7 +35,7 @@ export default function TabLayout() {
                   <FontAwesome
                     name="info-circle"
                     size={25}
-                    color={Colors[colorScheme ?? "light"].text}
+                    color={colorScheme === "light" ? defaultTextDark : defaultTextLight}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

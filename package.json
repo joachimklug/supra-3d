@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "update-gluestack": "npx gluestack-ui@latest update --all"
   },
   "jest": {
     "preset": "jest-expo"
@@ -29,7 +30,12 @@
     "react-native-gesture-handler": "~2.12.0",
     "react-native-safe-area-context": "^4.7.1",
     "react-native-screens": "~3.22.0",
-    "react-native-web": "^0.19.6"
+    "react-native-web": "^0.19.6",
+    "@gluestack-style/react": "latest",
+    "@gluestack-ui/provider": "latest",
+    "@gluestack-style/animation-plugin": "latest",
+    "@gluestack-ui/input": "latest",
+    "@gluestack-ui/link": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
@@ -42,7 +48,8 @@
     "jest-expo": "~49.0.0",
     "prettier": "3.0.0",
     "react-test-renderer": "18.2.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "@types/react-native": "^0.71.6"
   },
   "overrides": {
     "react-refresh": "~0.14.0"
