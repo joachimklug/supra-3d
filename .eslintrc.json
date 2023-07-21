@@ -12,7 +12,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "plugin:import/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,7 +22,9 @@
   },
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+    "import/namespace": "off",
+    "import/no-unresolved": "off"
   },
   "ignorePatterns": ["metro.config.js", "components"]
 }

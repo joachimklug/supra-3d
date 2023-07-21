@@ -8,13 +8,19 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "update-gluestack": "npx gluestack-ui@latest update --all"
+    "update-gluestack": "npx gluestack-ui@latest update --all",
+    "lint": "npx eslint . --fix"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@gluestack-style/animation-plugin": "latest",
+    "@gluestack-style/react": "latest",
+    "@gluestack-ui/input": "latest",
+    "@gluestack-ui/link": "latest",
+    "@gluestack-ui/provider": "latest",
     "@react-navigation/native": "^6.1.7",
     "expo": "~49.0.3",
     "expo-font": "~11.4.0",
@@ -30,26 +36,22 @@
     "react-native-gesture-handler": "~2.12.0",
     "react-native-safe-area-context": "^4.7.1",
     "react-native-screens": "~3.22.0",
-    "react-native-web": "^0.19.6",
-    "@gluestack-style/react": "latest",
-    "@gluestack-ui/provider": "latest",
-    "@gluestack-style/animation-plugin": "latest",
-    "@gluestack-ui/input": "latest",
-    "@gluestack-ui/link": "latest"
+    "react-native-web": "^0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
     "@types/react": "~18.2.14",
+    "@types/react-native": "^0.71.6",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "eslint": "^8.45.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.6.1",
     "jest-expo": "~49.0.0",
     "prettier": "3.0.0",
     "react-test-renderer": "18.2.0",
-    "typescript": "^5.1.6",
-    "@types/react-native": "^0.71.6"
+    "typescript": "^5.1.6"
   },
   "overrides": {
     "react-refresh": "~0.14.0"
