@@ -1,14 +1,13 @@
-import { StyleSheet } from "react-native";
 import { Text } from "@/components";
-import EditScreenInfo from "@/supra-components/EditScreenInfo";
 import { Box } from "@/supra-components/Themed";
+import Printer from "@/supra-components/settings/Printer";
+import { StyleSheet } from "react-native";
 
 export default function TabTwoScreen() {
   return (
     <Box style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <Box style={styles.separator} />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      {/* <Box style={styles.separator} /> */}
+      <Printer />
     </Box>
   );
 }
