@@ -4,8 +4,12 @@ import EditScreenInfo from "@/supra-components/EditScreenInfo";
 import { Text } from "@/components";
 import { Box } from "@/supra-components/Themed";
 import { config } from "@/gluestack-ui.config";
+import { useQuery } from "react-query";
+import { fetchSettings } from "@/services/settings";
 
 export default function TabOneScreen() {
+  const { data: prusaSettings } = useQuery("todos", fetchSettings);
+
   return (
     // <View style={styles.container}>
     <Box style={styles.container}>
@@ -15,6 +19,7 @@ export default function TabOneScreen() {
       {/* </StyledProvider> */}
       <Box style={styles.separator} />
       <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text>{prusaSettings?.printer.location}</Text>
     </Box>
     // </View>
   );
