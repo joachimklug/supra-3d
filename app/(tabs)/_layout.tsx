@@ -1,4 +1,4 @@
-import { defaultNavDark, defaultNavLight, defaultTextDark, defaultTextLight } from "@/supra-components/Themed";
+import Colors from "@/constants/Colors";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useColorScheme } from "react-native";
@@ -9,11 +9,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colorScheme === "light" ? defaultTextDark : defaultTextLight,
-        tabBarActiveBackgroundColor: colorScheme === "light" ? defaultNavLight : defaultNavDark,
-        tabBarInactiveBackgroundColor: colorScheme === "light" ? defaultNavLight : defaultNavDark,
-        headerStyle: { backgroundColor: colorScheme === "light" ? defaultNavLight : defaultNavDark },
-        headerTintColor: colorScheme === "light" ? defaultTextDark : defaultTextLight,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
       }}
     >
       <Tabs.Screen

@@ -26,5 +26,5 @@
     "import/namespace": "off",
     "import/no-unresolved": "off"
   },
-  "ignorePatterns": ["metro.config.js", "components"]
+  "ignorePatterns": ["metro.config.js"]
 }

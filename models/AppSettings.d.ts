@@ -1,4 +1,4 @@
-export interface Settings {
+export interface AppSettings {
   hostname: string;
   apiKey: string;
 }

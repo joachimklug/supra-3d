@@ -1,25 +1,25 @@
 import { StyleSheet } from "react-native";
-import { Text } from "@/components";
+import { Text } from "react-native-paper";
 import { ExternalLink } from "./ExternalLink";
 import { MonoText } from "./StyledText";
-import { Box } from "./Themed";
+import { View } from "./Themed";
 
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
-    <Box>
-      <Box style={styles.getStartedContainer}>
+    <View>
+      <View style={styles.getStartedContainer}>
         <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
 
-        <Box style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+        <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
           <MonoText>{path}</MonoText>
-        </Box>
+        </View>
 
         <Text style={styles.getStartedText}>
           Change any of the text, save the file, and your app will automatically update.
         </Text>
-      </Box>
+      </View>
 
-      <Box style={styles.helpContainer}>
+      <View style={styles.helpContainer}>
         <ExternalLink
           style={styles.helpLink}
           href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet"
@@ -28,8 +28,8 @@ export default function EditScreenInfo({ path }: { path: string }) {
             Tap here if your app doesn&apos;t automatically update after making changes
           </Text>
         </ExternalLink>
-      </Box>
-    </Box>
+      </View>
+    </View>
   );
 }
 

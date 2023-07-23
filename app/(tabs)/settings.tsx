@@ -1,14 +1,16 @@
-import { Text } from "@/components";
-import { Box } from "@/supra-components/Themed";
-import Printer from "@/supra-components/settings/Printer";
-import { StyleSheet } from "react-native";
+import { View } from "@/components/Themed";
+import Printer from "@/components/settings/Printer";
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 
 export default function TabTwoScreen() {
   return (
-    <Box style={styles.container}>
-      {/* <Box style={styles.separator} /> */}
-      <Printer />
-    </Box>
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+        <View style={{ display: "flex", gap: 2 * 8, width: "80%" }}>
+          <Printer />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
