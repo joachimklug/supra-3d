@@ -40,12 +40,29 @@ Mobile application to control PrusaLink compatible 3D printers
 
 All new Prusa 3d printers with 32bit controller have PrusaLink pre-installed. PrusaLink ennables the user to have a web-interface to control the 3d printer. This project builds on top of the Prusa API to enable the user to use a native app to control the printer from within the network.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Built With
 
 [![React][ReactNative.dev]][ReactNative-url]
 [![Expo][Expo.dev]][Expo-url]
+[![TanStackQuery][TanStackQuery.dev]][TanStackQuery-url]
+[![React-Native-Paper][RNP.dev]][RNP-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LOCAL DEVELOPMENT -->
+
+## Local Development
+
+To run the application locally there are two possibilites:
+
+1. Through expo on a device emulator or expo app on the phone
+   - Ensure to comment `EXPO_PUBLIC_PROXY_URL` in `.env`
+   - `npm run start`
+2. Through web interface
+   - Ensure to un-comment `EXPO_PUBLIC_PROXY_URL` in `.env`
+   - Replace `PRUSA-HOSTNAME` in `package.json` with the hostname/IP of your printer
+   - start proxy and keep it running `npm run proxy`
+   - `npm run start`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -103,3 +120,7 @@ Joachim Klug - github@joachimklug.com
 [ReactNative-url]: https://reactnative.dev
 [Expo.dev]: https://img.shields.io/badge/Expo-20232A?style=for-the-badge&logo=expo&logoColor=000020
 [Expo-url]: https://expo.dev
+[TanStackQuery.dev]: https://img.shields.io/badge/TanStack_Query-20232A?style=for-the-badge&logo=reactquery&logoColor=FF4154
+[TanStackQuery-url]: https://tanstack.com/query/
+[RNP.dev]: https://img.shields.io/badge/React--native--paper-20232A?style=for-the-badge&logo=react-native-paper&logoColor=000020
+[RNP-url]: https://callstack.github.io/react-native-paper
