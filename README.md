@@ -56,13 +56,15 @@ All new Prusa 3D printers with 32bit controller have PrusaLink pre-installed. Pr
 To run the application locally there are two possibilites:
 
 1. Through expo on a device emulator or expo app on the phone
-   - Ensure to comment `EXPO_PUBLIC_PROXY_URL` in `.env`
-   - `npm run start`
+   - Rename `.env.template` to `.env.local`
+   - Ensure to comment `EXPO_PUBLIC_PROXY_URL` in `.env.local`
+   - Start application `npm run start`
 2. Through web interface
-   - Ensure to un-comment `EXPO_PUBLIC_PROXY_URL` in `.env`
+   - Rename `.env.template` to `.env.local`
+   - Ensure to un-comment `EXPO_PUBLIC_PROXY_URL` in `.env.local`
    - Replace `PRUSA-HOSTNAME` in `package.json` with the hostname/IP of your printer
    - start proxy and keep it running `npm run proxy`
-   - `npm run start`
+   - Start application `npm run start`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

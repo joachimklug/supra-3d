@@ -1,0 +1,22 @@
+{
+  "build": {
+    "preview": {
+      "ios": {
+        "simulator": true
+      },
+      "env": {
+        "EXPO_PUBLIC_VERSION": "0.0.1"
+      }
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_VERSION": "0.0.1"
+      }
+    },
+    "test": {
+      "env": {
+        "EXPO_PUBLIC_VERSION": "0.0.1"
+      }
+    }
+  }
+}
