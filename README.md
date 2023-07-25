@@ -38,7 +38,7 @@ Mobile application to control PrusaLink compatible 3D printers
 
 ## About The Project
 
-All new Prusa 3d printers with 32bit controller have PrusaLink pre-installed. PrusaLink ennables the user to have a web-interface to control the 3d printer. This project builds on top of the Prusa API to enable the user to use a native app to control the printer from within the network.
+All new Prusa 3D printers with 32bit controller have PrusaLink pre-installed. PrusaLink ennables the user to have a web-interface to control the 3d printer. This project builds on top of the Prusa API to enable the user to use a native app to control the printer from within the network.
 
 ### Built With
 
