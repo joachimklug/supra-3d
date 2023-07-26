@@ -6,7 +6,7 @@ import { Text } from "react-native-paper";
 import { useQuery } from "react-query";
 
 export default function TabOneScreen() {
-  const { data: prusaSettings } = useQuery("todos", fetchSettings);
+  const { data: prusaSettings } = useQuery("settings", fetchSettings);
 
   return (
     <View style={styles.container}>

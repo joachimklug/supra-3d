@@ -1,15 +1,14 @@
 import { getSettings, storeSettings } from "@/storage/settings";
+import { prependHttp } from "@/utils/prependHttp";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import { Keyboard } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
-import { MonoText } from "../StyledText";
+import { Button, TextInput } from "react-native-paper";
 import { View } from "../Themed";
 
 export default function Printer() {
   const [hostname, setHostname] = useState("");
   const [apiKey, setApiKey] = useState("");
-  const [showHostnameHint, setShowHostnameHint] = useState(false);
   const [saved, setSaved] = useState(false);
 
   useFocusEffect(
@@ -34,21 +33,15 @@ export default function Printer() {
           mode="outlined"
           value={hostname}
           onChangeText={(text) => setHostname(text)}
-          right={<TextInput.Icon icon="information-outline" onPress={() => setShowHostnameHint(!showHostnameHint)} />}
+          placeholder="192.168.178.22"
         />
-        {showHostnameHint && (
-          <Text variant="bodyMedium">
-            Hostname should be provided including protocol (http://) and can be either an IP or hostname.{" "}
-            <MonoText>http://192.168.178.22</MonoText>
-          </Text>
-        )}
       </View>
       <TextInput label="API Key" mode="outlined" value={apiKey} onChangeText={(text) => setApiKey(text)} />
       <Button
         icon="content-save"
         mode="contained"
         onPress={() => {
-          storeSettings({ hostname, apiKey });
+          storeSettings({ hostname: prependHttp(hostname), apiKey });
           Keyboard.dismiss();
           setSaved(true);
         }}
