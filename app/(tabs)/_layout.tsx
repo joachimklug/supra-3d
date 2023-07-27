@@ -1,3 +1,4 @@
+import { Header } from "@/components/Header";
 import Colors from "@/constants/Colors";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
@@ -17,20 +18,7 @@ export default function TabLayout() {
         options={{
           title: "Dashboard",
           tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={24} color={color} />,
-          // headerRight: () => (
-          //   <Link href="/modal" asChild>
-          //     <Pressable>
-          //       {({ pressed }) => (
-          //         <FontAwesome
-          //           name="info-circle"
-          //           size={25}
-          //           color={colorScheme === "light" ? defaultTextDark : defaultTextLight}
-          //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-          //         />
-          //       )}
-          //     </Pressable>
-          //   </Link>
-          // ),
+          headerRight: (props) => <Header {...props} />,
         }}
       />
       <Tabs.Screen
