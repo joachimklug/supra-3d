@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header";
+import { OnlineStatus } from "@/components/OnlineStatus";
 import Colors from "@/constants/Colors";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
@@ -12,17 +12,18 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
       }}
+      initialRouteName="Dashboard"
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Dashboard",
           tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={24} color={color} />,
-          headerRight: (props) => <Header {...props} />,
+          headerRight: () => <OnlineStatus />,
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="Settings"
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => <Feather name="settings" size={24} color={color} />,

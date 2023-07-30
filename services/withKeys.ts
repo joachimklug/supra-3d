@@ -14,3 +14,18 @@ export async function fetchWithKey<T>(url: string): Promise<T> {
   }
   return response.json();
 }
+
+export async function postWithKey<T>(url: string, data: T): Promise<void> {
+  const apiKey = (await getSettings()).apiKey;
+  const response = await fetch(`${await getHostname()}${url}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+}

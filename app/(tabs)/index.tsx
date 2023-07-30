@@ -1,42 +1,26 @@
-import EditScreenInfo from "@/components/EditScreenInfo";
-import { View } from "@/components/Themed";
-import { fetchPrinter } from "@/services/printer";
-import { onlineState } from "@/state/onlineState";
+import BedTemp from "@/components/dashboard/BedTemp";
+import NozzleTemp from "@/components/dashboard/NozzleTemp";
+import { cloneElement } from "react";
 import { StyleSheet } from "react-native";
-import { Divider, Text } from "react-native-paper";
-import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { FlatGrid } from "react-native-super-grid";
 
-export default function TabOneScreen() {
-  const { data: printer } = useQuery("settings", fetchPrinter, { refetchInterval: 3000 });
-  const [online] = useRecoilState(onlineState);
-
+export default function Dashboard() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-      <Divider />
-      <Text>{printer?.temperature.bed.actual}</Text>
-      <Text>{printer?.temperature.bed.target}</Text>
-      <Text>Online: {online ? "true" : "false"}</Text>
-    </View>
+    <FlatGrid
+      itemDimension={130}
+      data={[<NozzleTemp key={1} />, <BedTemp key={2} />]}
+      renderItem={({ item }) => cloneElement(item, { itemStyles: styles.item })}
+      style={{ marginVertical: 4 * 8 }}
+      spacing={2 * 8}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  item: {
+    borderColor: "white",
+    borderRadius: 8,
+    borderWidth: 2,
+    padding: 2 * 8,
   },
 });

@@ -4,11 +4,9 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 
-const refetchInterval = 3_000;
-
 export const useIsOnline = (): undefined => {
   const [, setOnline] = useRecoilState(onlineState);
-  const { data: printer, isError } = useQuery("settings", fetchPrinter, { refetchInterval });
+  const { data: printer, isError } = useQuery("settings", fetchPrinter, { enabled: false });
   const printerError = printer?.state.flags.error ?? "true";
 
   useEffect(() => {

@@ -24,7 +24,8 @@
   "rules": {
     "comma-dangle": ["error", "always-multiline"],
     "import/namespace": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "require-await": "error"
   },
   "ignorePatterns": ["metro.config.js"]
 }

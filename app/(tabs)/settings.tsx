@@ -1,16 +1,17 @@
+import { AvoidKeyboard } from "@/components/AvoidKeyboard";
 import { View } from "@/components/Themed";
 import Printer from "@/components/settings/Printer";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
-export default function TabTwoScreen() {
+export default function Settings() {
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+    <AvoidKeyboard>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <View style={{ display: "flex", gap: 2 * 8, width: "80%" }}>
           <Printer />
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </AvoidKeyboard>
   );
 }
 
