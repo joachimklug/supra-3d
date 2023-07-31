@@ -46,6 +46,7 @@ All new Prusa 3D printers with 32bit controller have PrusaLink pre-installed. Pr
 [![Expo][Expo.dev]][Expo-url]
 [![TanStackQuery][TanStackQuery.dev]][TanStackQuery-url]
 [![React-Native-Paper][RNP.dev]][RNP-url]
+[![Recoil][Recoil.dev]][Recoil-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -126,3 +127,6 @@ Joachim Klug - github@joachimklug.com
 [TanStackQuery-url]: https://tanstack.com/query/
 [RNP.dev]: https://img.shields.io/badge/React--native--paper-20232A?style=for-the-badge&logo=react-native-paper&logoColor=000020
 [RNP-url]: https://callstack.github.io/react-native-paper
+[recoil.dev]: https://img.shields.io/badge/Recoil-20232A?style=for-the-badge&logo=recoil&logoColor=3578E5
+[recoil-url]: https://callstack.github.io/react-native-paper
+
