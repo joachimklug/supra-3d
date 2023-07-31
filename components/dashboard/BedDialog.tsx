@@ -27,7 +27,7 @@ interface Props {
 }
 
 export default function BedDialog({ visible, hideDialog }: Props) {
-  const { data: printer } = useQuery("settings", fetchPrinter, { enabled: false });
+  const { data: printer } = useQuery("fetchPrinter", fetchPrinter, { enabled: false });
   const currentTarget = printer?.temperature.bed.target ?? 0;
   const [bedTarget, setBedTarget] = useState(currentTarget.toString());
 

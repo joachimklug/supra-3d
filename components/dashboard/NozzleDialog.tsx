@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function NozzleDialog({ visible, hideDialog }: Props) {
-  const { data: printer } = useQuery("settings", fetchPrinter, { enabled: false });
+  const { data: printer } = useQuery("fetchPrinter", fetchPrinter, { enabled: false });
   const currentTarget = printer?.temperature.tool0.target ?? 0;
   const [nozzleTarget, setNozzleTarget] = useState(currentTarget.toString());
 

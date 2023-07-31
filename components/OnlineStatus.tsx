@@ -10,7 +10,7 @@ const dotSize = 10;
 
 export const OnlineStatus = () => {
   const [online] = useRecoilState(onlineState);
-  const { data: printer } = useQuery("settings", fetchPrinter, { enabled: false });
+  const { data: printer } = useQuery("fetchPrinter", fetchPrinter, { enabled: false });
 
   return (
     <View style={[flexRow, { gap: 8, marginRight: 2 * 8 }]}>

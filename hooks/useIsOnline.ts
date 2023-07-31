@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 
 export const useIsOnline = (): undefined => {
   const [, setOnline] = useRecoilState(onlineState);
-  const { data: printer, isError } = useQuery("settings", fetchPrinter, { enabled: false });
+  const { data: printer, isError } = useQuery("fetchPrinter", fetchPrinter, { enabled: false });
   const printerError = printer?.state.flags.error ?? "true";
 
   useEffect(() => {
