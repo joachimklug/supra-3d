@@ -5,12 +5,20 @@ import { cloneElement } from "react";
 import { StyleSheet } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 import { flexColumn } from "@/utils/commonStyles";
+import Axis from "@/components/dashboard/Axis";
 
 export default function Dashboard() {
   return (
     <FlatGrid
       itemDimension={160}
-      data={[<JobStatus key="JobStatus" />, <NozzleTemp key="NozzleTemp" />, <BedTemp key="BedTemp" />]}
+      data={[
+        <JobStatus key="JobStatus" />,
+        <NozzleTemp key="NozzleTemp" />,
+        <BedTemp key="BedTemp" />,
+        <Axis axis="x" key="xAxis" />,
+        <Axis axis="y" key="yAxis" />,
+        <Axis axis="z" key="zAxis" />,
+      ]}
       renderItem={({ item }) => cloneElement(item, { itemStyles: styles.item })}
       spacing={2 * 8}
     />
