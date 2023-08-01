@@ -1,11 +1,11 @@
+import Axis from "@/components/dashboard/Axis";
 import BedTemp from "@/components/dashboard/BedTemp";
-import NozzleTemp from "@/components/dashboard/NozzleTemp";
 import JobStatus from "@/components/dashboard/JobStatus";
+import NozzleTemp from "@/components/dashboard/NozzleTemp";
+import { flexColumn } from "@/utils/commonStyles";
 import { cloneElement } from "react";
 import { StyleSheet } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
-import { flexColumn } from "@/utils/commonStyles";
-import Axis from "@/components/dashboard/Axis";
 
 export default function Dashboard() {
   return (

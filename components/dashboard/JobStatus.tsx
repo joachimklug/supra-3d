@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import { toHoursMinutesSeconds } from "@/utils/toHoursMinutesSeconds";
 import { getHoursMinutesText } from "@/utils/getHoursMinutesText";
 import { getTargetTime } from "@/utils/getTargetTime";
+import { fetchPrinter } from "@/services/printer";
 
 interface Props {
   itemStyles?: StyleProp<ViewStyle>;
@@ -18,14 +19,14 @@ interface Props {
 
 export default function JobStatus({ itemStyles }: Props) {
   const { data: job } = useQuery("fetchCurrentJob", fetchCurrentJob, { enabled: false });
+  const { data: printer } = useQuery("fetchPrinter", fetchPrinter, { enabled: false });
   const [online] = useRecoilState(onlineState);
   const colorScheme = useColorScheme();
   const textColor = Colors[colorScheme ?? "light"].text;
-  const isOperational = job?.state === "Operational";
-  const showAllData = online && !isOperational;
+  const isOperational = printer?.state.text === "Operational";
+  const showAllData = printer?.state.flags.printing;
   const printTimeLeft = job?.progress.printTimeLeft ?? 0;
 
-  fetchCurrentJob;
   return (
     <View style={itemStyles}>
       {showAllData && (
