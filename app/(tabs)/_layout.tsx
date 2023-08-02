@@ -23,6 +23,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="Files"
+        options={{
+          title: "Files",
+          tabBarIcon: ({ color }) => <MaterialIcons name="folder-open" size={24} color={color} />,
+          headerRight: () => <OnlineStatus />,
+        }}
+      />
+      <Tabs.Screen
         name="Settings"
         options={{
           title: "Settings",

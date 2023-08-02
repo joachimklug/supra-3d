@@ -20,8 +20,8 @@ export async function postWithKey<T>(url: string, data: T): Promise<void> {
   const response = await fetch(`${await getHostname()}${url}`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       "X-API-Key": apiKey,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
