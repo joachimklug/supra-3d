@@ -1,7 +1,8 @@
 import { File, FileFolder, FileId } from "@/models/Files";
 import { fetchFilesAndFolders } from "@/services/files";
 import { isFolder } from "@/utils/isFolder";
-import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
+import { useEffect, useRef, useState } from "react";
 import { RefreshControl, ScrollView } from "react-native";
 import { List, Searchbar } from "react-native-paper";
 import { useQuery } from "react-query";
@@ -10,6 +11,9 @@ export default function Files() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data: files = [], isLoading, isFetching, refetch } = useQuery("fetchFilesAndFolders", fetchFilesAndFolders);
   const [currentFileView, setCurrentFileView] = useState<FileFolder[]>([]);
+  const parentId = useRef<number>();
+  const router = useRouter();
+  const isRootLevel = Boolean(currentFileView?.[0]?.id === files?.[0]?.id);
 
   useEffect(() => {
     if (!isLoading) {
@@ -23,35 +27,38 @@ export default function Files() {
         placeholder="Search"
         onChangeText={(search) => {
           setSearchQuery(search);
-          search ? setCurrentFileView(findFileByName(files, search)) : setCurrentFileView(files);
+          search ? setCurrentFileView(findFilesByName(files, search)) : setCurrentFileView(files);
         }}
         onClearIconPress={() => setCurrentFileView(files)}
         value={searchQuery}
         style={{ margin: 2 * 8 }}
       />
       <ScrollView refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}>
-        {Boolean(currentFileView?.[0]?.parent) && (
+        {!isRootLevel && (
           <List.Item
             title="..."
             left={(props) => <List.Icon {...props} icon="arrow-left-top" />}
-            onPress={() => setCurrentFileView(findFileLevelById(files, currentFileView[0].parent ?? 1))}
+            onPress={() =>
+              setCurrentFileView(findFileLevelById(files, currentFileView?.[0]?.parent ?? parentId.current ?? 1))
+            }
           />
         )}
         {currentFileView.sort(sortByFolderAndName).map((item) => {
           const folder = isFolder(item);
-          const isEmpty = folder && !item.children.length;
           return (
             <List.Item
               key={item.name}
               title={item.display}
               description={folder ? `${item.children.length} items` : undefined}
-              left={(props) => (
-                <List.Icon
-                  {...props}
-                  icon={!folder ? "file-cog-outline" : isEmpty ? "folder-hidden" : "folder-outline"}
-                />
-              )}
-              onPress={folder && !isEmpty ? () => setCurrentFileView(item.children) : undefined}
+              left={(props) => <List.Icon {...props} icon={folder ? "folder-outline" : "file-cog-outline"} />}
+              onPress={
+                folder
+                  ? () => {
+                      setCurrentFileView(item.children);
+                      parentId.current = item.id;
+                    }
+                  : () => router.push({ pathname: "/FileDetails", params: { id: item.id } })
+              }
             />
           );
         })}
@@ -88,10 +95,10 @@ const findFileLevelById = (files: FileFolder[], id: FileId): FileFolder[] => {
   return files;
 };
 
-const findFileByName = (files: FileFolder[], searchString: string): File[] =>
+const findFilesByName = (files: FileFolder[], searchString: string): File[] =>
   files.reduce((accumulator, currentValue) => {
     if (isFolder(currentValue)) {
-      return [...accumulator, ...findFileByName(currentValue.children, searchString)];
+      return [...accumulator, ...findFilesByName(currentValue.children, searchString)];
     }
     if (currentValue.display.toLowerCase().includes(searchString.toLowerCase())) {
       return [...accumulator, currentValue];

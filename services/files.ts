@@ -4,16 +4,20 @@ import { fetchWithKey } from "./withKeys";
 export const fetchFilesAndFolders = async () =>
   await fetchWithKey<RawFiles>("/api/files").then((result) => toFiles(result.files, null));
 
-const toFiles = (files: RawFileFolder[], parent: number | null, currentId = 0): FileFolder[] =>
-  files.map((item) => {
-    currentId++;
-    return {
-      ...item,
-      id: currentId,
-      parent,
-      children: item.children ? toFiles(item.children, currentId, currentId) : undefined,
-    } as FileFolder;
-  });
+const toFiles = (files: RawFileFolder[], parent: number | null): FileFolder[] => {
+  let currentId = 0;
+  const toFilesMapper = (files: RawFileFolder[], parent: number | null): FileFolder[] =>
+    files.map((item) => {
+      currentId++;
+      return {
+        ...item,
+        id: currentId,
+        parent,
+        children: item.children ? toFilesMapper(item.children, currentId) : undefined,
+      } as FileFolder;
+    });
+  return toFilesMapper(files, parent);
+};
 
 interface RawFiles {
   files: RawFolder[];
