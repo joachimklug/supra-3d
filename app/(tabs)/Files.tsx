@@ -11,7 +11,7 @@ export default function Files() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data: files = [], isLoading, isFetching, refetch } = useQuery("fetchFilesAndFolders", fetchFilesAndFolders);
   const [currentFileView, setCurrentFileView] = useState<FileFolder[]>([]);
-  const parentId = useRef<number>();
+  const parentId = useRef<FileId[]>([]);
   const router = useRouter();
   const isRootLevel = Boolean(currentFileView?.[0]?.id === files?.[0]?.id);
 
@@ -38,9 +38,10 @@ export default function Files() {
           <List.Item
             title="..."
             left={(props) => <List.Icon {...props} icon="arrow-left-top" />}
-            onPress={() =>
-              setCurrentFileView(findFileLevelById(files, currentFileView?.[0]?.parent ?? parentId.current ?? 1))
-            }
+            onPress={() => {
+              setCurrentFileView(findFileLevelById(files, parentId.current.at(-1) ?? 1) ?? files);
+              parentId.current.pop();
+            }}
           />
         )}
         {currentFileView.sort(sortByFolderAndName).map((item) => {
@@ -55,7 +56,7 @@ export default function Files() {
                 folder
                   ? () => {
                       setCurrentFileView(item.children);
-                      parentId.current = item.id;
+                      parentId.current.push(item.id);
                     }
                   : () => router.push({ pathname: "/FileDetails", params: { id: item.id } })
               }
@@ -83,16 +84,19 @@ const sortByFolderAndName = (a: FileFolder, b: FileFolder) => {
   return 0;
 };
 
-const findFileLevelById = (files: FileFolder[], id: FileId): FileFolder[] => {
-  if (files.find((file) => file.id === id)) {
-    return files;
-  } else {
-    for (const index in files) {
-      const node = files[index];
-      if (isFolder(node)) return findFileLevelById(node.children, id);
+const findFileLevelById = (files: FileFolder[], id: FileId): FileFolder[] | undefined => {
+  for (const index in files) {
+    const node = files[index];
+    if (node.id === id) {
+      return files;
+    }
+    if (isFolder(node)) {
+      const found = findFileLevelById(node.children, id);
+      if (found) {
+        return found;
+      }
     }
   }
-  return files;
 };
 
 const findFilesByName = (files: FileFolder[], searchString: string): File[] =>
