@@ -58,7 +58,7 @@ export default function Files() {
                       setCurrentFileView(item.children);
                       parentId.current.push(item.id);
                     }
-                  : () => router.push({ pathname: "/fileDetailsNew", params: { id: item.id } })
+                  : () => router.push({ pathname: "/FileDetails", params: { id: item.id } })
               }
             />
           );

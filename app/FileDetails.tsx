@@ -28,7 +28,7 @@ const TableRow = ({ name, content }: TableRowProps) => (
   </View>
 );
 
-export default function fileDetailsNew() {
+export default function FileDetails() {
   const { id } = useLocalSearchParams();
   const [image, setImage] = useState<string>("");
   const { data: files = [] } = useQuery("fetchFilesAndFolders", fetchFilesAndFolders);

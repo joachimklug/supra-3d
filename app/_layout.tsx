@@ -55,7 +55,7 @@ function RootLayoutNav() {
             <AutomatizationProvider>
               <Stack>
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="fileDetailsNew" options={{ presentation: "modal", title: "File details" }} />
+                <Stack.Screen name="FileDetails" options={{ presentation: "modal", title: "File details" }} />
               </Stack>
             </AutomatizationProvider>
           </ThemeProvider>
