@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColumn: {
-    width: 95,
+    width: 110,
   },
 });
