@@ -8,8 +8,7 @@ import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator } from "react-native";
 import { useQuery } from "react-query";
 import { Text } from "react-native-paper";
-
-const NON_BREAKING_HYPHEN = "\u2011";
+import { replaceHypen } from "@/utils/replaceHypen";
 
 export default function FileDetails() {
   const { id } = useLocalSearchParams();
@@ -22,7 +21,7 @@ export default function FileDetails() {
 
   return (
     <View style={{ paddingHorizontal: 3 * 8, paddingVertical: 2 * 8, flex: 1, display: "flex", gap: 3 * 8 }}>
-      <Text variant="headlineSmall">{file.display.replace("-", NON_BREAKING_HYPHEN)}</Text>
+      <Text variant="headlineSmall">{replaceHypen(file.display)}</Text>
       <FileImage thumbnailRef={file.refs.thumbnail} horizontalPadding={3} />
       <PropertiesTable file={file} />
     </View>
