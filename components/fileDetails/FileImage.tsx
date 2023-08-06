@@ -2,14 +2,16 @@ import { View } from "@/components/Themed";
 import { File } from "@/models/Files";
 import { fetchWithKey } from "@/services/withKeys";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Image, StyleSheet } from "react-native";
+import { ActivityIndicator, Image, StyleSheet, Dimensions } from "react-native";
 import { useQuery } from "react-query";
 
 interface Props {
   thumbnailRef: File["refs"]["thumbnail"];
+  horizontalPadding?: number;
 }
 
-export const FileImage = ({ thumbnailRef }: Props): JSX.Element | null => {
+export const FileImage = ({ thumbnailRef, horizontalPadding = 0 }: Props): JSX.Element | null => {
+  const windowWidth = Dimensions.get("window").width;
   const [image, setImage] = useState<string>("");
   const hasThumbnail = Boolean(thumbnailRef);
   const { data: thumbnail, isFetching } = useQuery(
@@ -17,6 +19,7 @@ export const FileImage = ({ thumbnailRef }: Props): JSX.Element | null => {
     () => fetchWithKey<Blob>(thumbnailRef ?? "", "blob"),
     { enabled: hasThumbnail },
   );
+  const styles = stylesWithProps((windowWidth - 2 * horizontalPadding * 8) / 160);
 
   useEffect(() => {
     if (thumbnail) {
@@ -32,19 +35,23 @@ export const FileImage = ({ thumbnailRef }: Props): JSX.Element | null => {
     ) : (
       <Image source={{ uri: image }} style={styles.image} />
     )
-  ) : null;
+  ) : (
+    <Image source={require("../../assets/images/thumbnail.png")} style={styles.image} />
+  );
 };
 
-const styles = StyleSheet.create({
-  image: {
-    width: 160,
-    height: 120,
-    alignSelf: "center",
-  },
-  imageContainer: {
-    borderWidth: 0.5,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const stylesWithProps = (sizeFactor: number) =>
+  StyleSheet.create({
+    image: {
+      width: 160 * sizeFactor,
+      height: 120 * sizeFactor,
+      alignSelf: "center",
+      borderRadius: 8,
+    },
+    imageContainer: {
+      borderWidth: 0.5,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });

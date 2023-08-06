@@ -17,9 +17,7 @@ const TableRow = ({ name, content }: TableRowProps) => (
     <View style={styles.tableColumn}>
       <Text>{name}</Text>
     </View>
-    <Text ellipsizeMode="tail" numberOfLines={1}>
-      {content}
-    </Text>
+    <Text style={{ flexShrink: 1 }}>{content}</Text>
   </View>
 );
 
@@ -30,7 +28,6 @@ interface Props {
 export default function PropertiesTable({ file }: Props) {
   return (
     <View style={styles.table}>
-      <TableRow name="Name:" content={file.display} />
       {file.gcodeAnalysis.estimatedPrintTime && (
         <TableRow
           name="Print time:"
@@ -52,9 +49,8 @@ export default function PropertiesTable({ file }: Props) {
 
 const styles = StyleSheet.create({
   table: {
-    marginVertical: 2 * 8,
     display: "flex",
-    gap: 8 / 2,
+    gap: 8,
   },
   tableRow: {
     display: "flex",
