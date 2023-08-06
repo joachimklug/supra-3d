@@ -1,11 +1,15 @@
 import { FileFolder } from "@/models/Files";
-import { fetchWithKey, postWithKey } from "./withKeys";
+import { deleteWithKey, fetchWithKey, postWithKey } from "./withKeys";
 
 export const startPrint = async (origin: string, path: string) => {
   await postWithKey(`/api/files/${origin}/${path}`, {
     command: "select",
     print: true,
   });
+};
+
+export const removeFileOrFolder = async (origin: string, path: string) => {
+  await deleteWithKey(`/api/files/${origin}/${path}`);
 };
 
 export const fetchFilesAndFolders = async () =>

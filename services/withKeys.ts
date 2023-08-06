@@ -15,6 +15,20 @@ export async function fetchWithKey<T>(url: string, type: "json" | "blob" = "json
   return type === "json" ? response.json() : response.blob();
 }
 
+export async function deleteWithKey(url: string): Promise<number> {
+  const apiKey = (await getSettings()).apiKey;
+  const response = await fetch(`${await getHostname()}${url}`, {
+    method: "DELETE",
+    headers: {
+      "X-API-Key": apiKey,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.status;
+}
+
 export async function postWithKey<T>(url: string, data: T): Promise<void> {
   const apiKey = (await getSettings()).apiKey;
   const response = await fetch(`${await getHostname()}${url}`, {

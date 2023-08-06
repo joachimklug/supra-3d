@@ -1,9 +1,9 @@
 import { View } from "@/components/Themed";
 import { File } from "@/models/Files";
-import { Button } from "react-native-paper";
+import { startPrint } from "@/services/files";
 import { router } from "expo-router";
 import { StyleSheet } from "react-native";
-import { startPrint } from "@/services/files";
+import { Button } from "react-native-paper";
 
 interface Props {
   file: File;
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
+    flexWrap: "wrap",
     gap: 2 * 8,
     marginTop: 8,
   },
