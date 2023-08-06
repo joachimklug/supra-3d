@@ -22,7 +22,7 @@ export default function NozzleTemp({ itemStyles }: Props) {
 
   return (
     <>
-      <TouchableOpacity onPress={() => setOpen(true)}>
+      <TouchableOpacity onPress={() => setOpen(true)} style={{ flex: 1 }}>
         <View style={itemStyles}>
           <Text variant="bodyLarge">Nozzle</Text>
           <Text

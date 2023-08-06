@@ -42,7 +42,7 @@ export default function PropertiesTable({ file }: Props) {
       )}
       {file.gcodeAnalysis.material && <TableRow name="Material:" content={file.gcodeAnalysis.material} />}
       <TableRow name="File size:" content={filesize(file.size, { base: 2, standard: "jedec" }).toString()} />
-      <TableRow name="Date:" content={new Date(file.date * 1000).toLocaleString()} />
+      <TableRow name="Modified:" content={new Date(file.date * 1000).toLocaleString()} />
     </View>
   );
 }

@@ -22,7 +22,7 @@ export default function Axis({ itemStyles, axis }: Props) {
 
   return (
     <>
-      <TouchableOpacity onPress={() => setOpen(true)}>
+      <TouchableOpacity onPress={() => setOpen(true)} style={{ flex: 1 }}>
         <View style={itemStyles}>
           <Text variant="bodyLarge">{axis}-Axis</Text>
           <MaterialCommunityIcons name={`axis-${axis}-arrow`} size={28} color={textColor} />

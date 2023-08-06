@@ -22,7 +22,7 @@ export default function BedTemp({ itemStyles }: Props) {
 
   return (
     <>
-      <TouchableOpacity onPress={() => setOpen(true)}>
+      <TouchableOpacity onPress={() => setOpen(true)} style={{ flex: 1 }}>
         <View style={itemStyles}>
           <Text variant="bodyLarge">Bed</Text>
           <Text

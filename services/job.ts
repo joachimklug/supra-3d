@@ -1,4 +1,21 @@
 import { CurrentJob } from "@/models/CurrentJob";
-import { fetchWithKey } from "./withKeys";
+import { fetchWithKey, postWithKey } from "./withKeys";
 
 export const fetchCurrentJob = async () => await fetchWithKey<CurrentJob>("/api/job");
+
+export const cancelCurrentJob = async () =>
+  await postWithKey("/api/job", {
+    command: "cancel",
+  });
+
+export const pauseCurrentJob = async () =>
+  await postWithKey("/api/job", {
+    command: "pause",
+    action: "pause",
+  });
+
+export const resumeCurrentJob = async () =>
+  await postWithKey("/api/job", {
+    command: "pause",
+    action: "resume",
+  });

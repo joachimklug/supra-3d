@@ -22,7 +22,10 @@ export default function FileActions({ file }: Props) {
       <Button
         icon="printer-3d-nozzle-outline"
         mode="contained"
-        onPress={() => startPrint(file.origin, file.path)}
+        onPress={() => {
+          startPrint(file.origin, file.path);
+          router.push("/");
+        }}
         disabled={!printer?.state.flags.ready}
       >
         Print

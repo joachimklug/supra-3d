@@ -29,7 +29,7 @@ export async function deleteWithKey(url: string): Promise<number> {
   return response.status;
 }
 
-export async function postWithKey<T>(url: string, data: T): Promise<void> {
+export async function postWithKey<T>(url: string, data: T): Promise<number> {
   const apiKey = (await getSettings()).apiKey;
   const response = await fetch(`${await getHostname()}${url}`, {
     method: "POST",
@@ -42,4 +42,5 @@ export async function postWithKey<T>(url: string, data: T): Promise<void> {
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
+  return response.status;
 }
