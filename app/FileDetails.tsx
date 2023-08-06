@@ -9,6 +9,7 @@ import { ActivityIndicator } from "react-native";
 import { useQuery } from "react-query";
 import { Text } from "react-native-paper";
 import { replaceHypen } from "@/utils/replaceHypen";
+import FileActions from "@/components/fileDetails/FileActions";
 
 export default function FileDetails() {
   const { id } = useLocalSearchParams();
@@ -24,6 +25,7 @@ export default function FileDetails() {
       <Text variant="headlineSmall">{replaceHypen(file.display)}</Text>
       <FileImage thumbnailRef={file.refs.thumbnail} horizontalPadding={3} />
       <PropertiesTable file={file} />
+      <FileActions file={file} />
     </View>
   );
 }

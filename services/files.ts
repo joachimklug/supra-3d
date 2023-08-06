@@ -1,5 +1,12 @@
 import { FileFolder } from "@/models/Files";
-import { fetchWithKey } from "./withKeys";
+import { fetchWithKey, postWithKey } from "./withKeys";
+
+export const startPrint = async (origin: string, path: string) => {
+  await postWithKey(`/api/files/${origin}/${path}`, {
+    command: "select",
+    print: true,
+  });
+};
 
 export const fetchFilesAndFolders = async () =>
   await fetchWithKey<RawFiles>("/api/files").then((result) => toFiles(result.files, null));
