@@ -1,9 +1,7 @@
 import { View } from "@/components/Themed";
+import { useGetThumbnail } from "@/hooks/useGetThumbnail";
 import { File } from "@/models/Files";
-import { fetchWithKey } from "@/services/withKeys";
-import { useEffect, useState } from "react";
-import { ActivityIndicator, Image, StyleSheet, Dimensions } from "react-native";
-import { useQuery } from "react-query";
+import { ActivityIndicator, Dimensions, Image, StyleSheet } from "react-native";
 
 interface Props {
   thumbnailRef: File["refs"]["thumbnail"];
@@ -12,20 +10,8 @@ interface Props {
 
 export const FileImage = ({ thumbnailRef, horizontalPadding = 0 }: Props): JSX.Element | null => {
   const windowWidth = Dimensions.get("window").width;
-  const [image, setImage] = useState<string>("");
-  const hasThumbnail = Boolean(thumbnailRef);
-  const { data: thumbnail, isFetching } = useQuery(
-    "getThumbnail",
-    () => fetchWithKey<Blob>(thumbnailRef ?? "", "blob"),
-    { enabled: hasThumbnail },
-  );
   const styles = stylesWithProps((windowWidth - 2 * horizontalPadding * 8) / 160);
-
-  useEffect(() => {
-    if (thumbnail) {
-      setImage(URL.createObjectURL(thumbnail));
-    }
-  }, [thumbnail]);
+  const { image, hasThumbnail, isFetching } = useGetThumbnail(thumbnailRef);
 
   return hasThumbnail ? (
     isFetching || !image ? (
