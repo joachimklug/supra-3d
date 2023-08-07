@@ -3,6 +3,11 @@ import { fetchWithKey, postWithKey } from "./withKeys";
 
 export const fetchCurrentJob = async () => await fetchWithKey<CurrentJob>("/api/job");
 
+export const startCurrentJob = async () =>
+  await postWithKey("/api/job", {
+    command: "start",
+  });
+
 export const cancelCurrentJob = async () =>
   await postWithKey("/api/job", {
     command: "cancel",
