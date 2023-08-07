@@ -13,6 +13,9 @@ export const findFilesByName = (files: FileFolder[], searchString: string): File
   }, [] as File[]);
 
 export const findFileByPath = (files: FileFolder[], path: File["path"]): File | undefined => {
+  if (!path) {
+    return;
+  }
   for (const index in files) {
     const node = files[index];
     if (node.path === path && !isFolder(node)) {

@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 export const AutomatizationProvider = ({ children }: PropsWithChildren) => {
   const [online] = useRecoilState(onlineState);
   useQuery("fetchPrinter", fetchPrinter, { refetchInterval: 3_000 });
-  useQuery("fetchCurrentJob", fetchCurrentJob, { refetchInterval: online ? 15_000 : 60_000 });
+  useQuery("fetchCurrentJob", fetchCurrentJob, { refetchInterval: online ? 3_000 : 60_000 });
 
   useIsOnline();
 

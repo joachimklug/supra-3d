@@ -1,5 +1,6 @@
 import Axis from "@/components/dashboard/Axis";
 import BedTemp from "@/components/dashboard/BedTemp";
+import JobImage from "@/components/dashboard/JobImage";
 import JobStatus from "@/components/dashboard/JobStatus";
 import NozzleTemp from "@/components/dashboard/NozzleTemp";
 import { flexColumn } from "@/utils/commonStyles";
@@ -14,6 +15,7 @@ export default function Dashboard() {
         itemDimension={160}
         data={[
           <JobStatus key="JobStatus" />,
+          <JobImage key="JobImage" />,
           <NozzleTemp key="NozzleTemp" />,
           <BedTemp key="BedTemp" />,
           <Axis axis="x" key="xAxis" />,
