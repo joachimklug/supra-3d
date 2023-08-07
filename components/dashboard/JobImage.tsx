@@ -7,7 +7,7 @@ import { Image, StyleProp, TouchableOpacity, ViewStyle } from "react-native";
 import { useQuery } from "react-query";
 import { View } from "../Themed";
 
-const sizeFactor = 0.75;
+const sizeFactor = 1;
 
 interface Props {
   itemStyles?: StyleProp<ViewStyle>;
@@ -29,7 +29,7 @@ export default function JobImage({ itemStyles }: Props) {
         onPress={() => router.push({ pathname: "/FileDetails", params: { id: file.id } })}
         style={{ flex: 1 }}
       >
-        <View style={itemStyles}>
+        <View style={[itemStyles, { padding: 0, backgroundColor: "#585858" }]}>
           <Image source={{ uri: image }} style={{ width: 160 * sizeFactor, height: 120 * sizeFactor }} />
         </View>
       </TouchableOpacity>
