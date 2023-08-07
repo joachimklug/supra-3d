@@ -1,5 +1,6 @@
-import { File, FileFolder, FileId } from "@/models/Files";
+import { FileFolder, FileId } from "@/models/Files";
 import { fetchFilesAndFolders } from "@/services/files";
+import { findFileLevelById, findFilesByName } from "@/utils/findFiles";
 import { isFolder } from "@/utils/isFolder";
 import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
@@ -83,29 +84,3 @@ const sortByFolderAndName = (a: FileFolder, b: FileFolder) => {
   }
   return 0;
 };
-
-const findFileLevelById = (files: FileFolder[], id: FileId): FileFolder[] | undefined => {
-  for (const index in files) {
-    const node = files[index];
-    if (node.id === id) {
-      return files;
-    }
-    if (isFolder(node)) {
-      const found = findFileLevelById(node.children, id);
-      if (found) {
-        return found;
-      }
-    }
-  }
-};
-
-const findFilesByName = (files: FileFolder[], searchString: string): File[] =>
-  files.reduce((accumulator, currentValue) => {
-    if (isFolder(currentValue)) {
-      return [...accumulator, ...findFilesByName(currentValue.children, searchString)];
-    }
-    if (currentValue.display.toLowerCase().includes(searchString.toLowerCase())) {
-      return [...accumulator, currentValue];
-    }
-    return accumulator;
-  }, [] as File[]);
