@@ -7,7 +7,7 @@ export const getTargetColor = (actual: number, target: number, defaultColor: Col
     return defaultColor;
   }
   if (actual >= target - target * rangePercentage && actual <= target + target * rangePercentage) {
-    return "green";
+    return defaultColor;
   }
   return "red";
 };
