@@ -7,7 +7,7 @@ export const useGetThumbnail = (thumbnailRef: File["refs"]["thumbnail"]) => {
   const [image, setImage] = useState<string>("");
   const hasThumbnail = Boolean(thumbnailRef);
   const { data: thumbnail, isFetching } = useQuery(
-    "getThumbnail",
+    `getThumbnail-${thumbnailRef}`,
     () => fetchWithKey<Blob>(thumbnailRef ?? "", "blob"),
     { enabled: hasThumbnail },
   );
