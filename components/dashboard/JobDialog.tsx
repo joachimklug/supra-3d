@@ -20,7 +20,7 @@ export default function JobDialog({ visible, hideDialog }: Props) {
         <Dialog.Actions>
           {printerState?.printing && <Button onPress={pauseCurrentJob}>Pause Job</Button>}
           {printerState?.paused && <Button onPress={pauseCurrentJob}>Resume Job</Button>}
-          {printerState?.printing || (printerState?.paused && <Button onPress={cancelCurrentJob}>Cancel Job</Button>)}
+          {(printerState?.printing || printerState?.paused) && <Button onPress={cancelCurrentJob}>Cancel Job</Button>}
           {printerState?.ready && currentJob?.job.file && <Button onPress={startCurrentJob}>Restart last Job</Button>}
         </Dialog.Actions>
       </Dialog>
