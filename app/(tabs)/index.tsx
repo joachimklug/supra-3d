@@ -18,9 +18,9 @@ export default function Dashboard() {
           <JobImage key="JobImage" />,
           <NozzleTemp key="NozzleTemp" />,
           <BedTemp key="BedTemp" />,
-          <Axis axis="x" key="xAxis" />,
-          <Axis axis="y" key="yAxis" />,
           <Axis axis="z" key="zAxis" />,
+          <Axis axis="y" key="yAxis" />,
+          <Axis axis="x" key="xAxis" />,
         ]}
         renderItem={({ item }) => cloneElement(item, { itemStyles: styles.item })}
         spacing={2 * 8}

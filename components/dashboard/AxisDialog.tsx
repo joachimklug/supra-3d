@@ -4,8 +4,8 @@ import { disableSteppers, fetchPrinter, moveAxis } from "@/services/printer";
 import { flexRow } from "@/utils/commonStyles";
 import { getValidAxisName } from "@/utils/getValidAxisName";
 import { useState } from "react";
-import { Text, useColorScheme } from "react-native";
-import { Dialog, IconButton, Portal, SegmentedButtons } from "react-native-paper";
+import { useColorScheme } from "react-native";
+import { Dialog, IconButton, Portal, SegmentedButtons, Text } from "react-native-paper";
 import { useQuery } from "react-query";
 
 interface Props {
@@ -19,13 +19,14 @@ export default function AxisDialog({ visible, hideDialog, axis }: Props) {
   const [stepSize, setStepSize] = useState("1");
   const [selectedAxis, setSelectedAxis] = useState<AxisName>(axis);
   const colorScheme = useColorScheme();
+  const isReady = Boolean(printer?.state.flags.ready);
 
   return (
     <Portal>
       <Dialog
         visible={visible}
         onDismiss={() => {
-          disableSteppers();
+          isReady && disableSteppers();
           hideDialog();
         }}
       >
