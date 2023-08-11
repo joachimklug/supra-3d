@@ -1,55 +1,54 @@
-import { getSettings, storeSettings } from "@/storage/settings";
-import { prependHttp } from "@/utils/prependHttp";
-import { useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
-import { Keyboard } from "react-native";
-import { Button, TextInput } from "react-native-paper";
-import { View } from "../Themed";
+import { useSettings } from "@/hooks/useSettings";
+import { useState } from "react";
+import { Pressable } from "react-native";
+import { List } from "react-native-paper";
+import PrinterDialog from "./PrinterDialog";
+import { storeSettings } from "@/storage/settings";
+import { PrinterSettings } from "@/models/AppSettings";
 
 export default function Printer() {
-  const [hostname, setHostname] = useState("");
-  const [apiKey, setApiKey] = useState("");
-  const [saved, setSaved] = useState(false);
-
-  useFocusEffect(
-    useCallback(() => {
-      (async () => {
-        const currentSettings = await getSettings();
-        if (!currentSettings) {
-          return;
-        }
-        setHostname(currentSettings.hostname);
-        setApiKey(currentSettings.apiKey);
-      })();
-      return () => setSaved(false);
-    }, []),
-  );
+  const [open, setOpen] = useState(false);
+  const { settings, refreshSettings } = useSettings();
+  const [printer, setPrinter] = useState<PrinterSettings>();
 
   return (
     <>
-      <View>
-        <TextInput
-          label="Hostname"
-          mode="outlined"
-          value={hostname}
-          onChangeText={(text) => setHostname(text)}
-          placeholder="192.168.178.22"
+      {settings?.printer.map((printer) => (
+        <List.Item
+          key={printer.name}
+          title={printer.name}
+          onPress={() => {
+            setPrinter(printer);
+            setOpen(true);
+          }}
+          right={(props) => (
+            <Pressable
+              onPress={async () => {
+                await storeSettings({ printer: [] });
+                setPrinter(undefined);
+                refreshSettings();
+              }}
+            >
+              <List.Icon {...props} icon="trash-can-outline" />
+            </Pressable>
+          )}
         />
-      </View>
-      <TextInput label="API Key" mode="outlined" value={apiKey} onChangeText={(text) => setApiKey(text)} />
-      <Button
-        icon="content-save"
-        mode="contained"
-        onPress={() => {
-          storeSettings({ hostname: prependHttp(hostname), apiKey });
-          Keyboard.dismiss();
-          setSaved(true);
+      ))}
+      {!settings?.printer.length && (
+        <List.Item
+          title="Add Printer"
+          left={(props) => <List.Icon {...props} icon="plus" />}
+          onPress={() => setOpen(true)}
+        />
+      )}
+      <PrinterDialog
+        visible={open}
+        hideDialog={() => {
+          setOpen(false);
+          refreshSettings();
         }}
-        buttonColor={saved ? "hsl(123, 46%, 34%)" : undefined}
-        textColor={saved ? "hsl(123, 49%, 94%)" : undefined}
-      >
-        {saved ? "Saved" : "Save"}
-      </Button>
+        printer={printer}
+      />
     </>
   );
 }

@@ -5,5 +5,5 @@ export const getHostname = async (): Promise<string> => {
   if (proxy) {
     return proxy;
   }
-  return (await getSettings()).hostname;
+  return (await getSettings()).printer.at(0)?.hostname ?? "";
 };

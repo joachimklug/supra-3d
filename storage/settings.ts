@@ -3,8 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const key = "settings";
 const dummySettings: AppSettings = {
-  hostname: "",
-  apiKey: "",
+  printer: [],
 };
 
 export const storeSettings = async (newSettings: Partial<AppSettings>) => {

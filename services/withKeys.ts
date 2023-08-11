@@ -1,9 +1,10 @@
-import { getSettings } from "@/storage/settings";
+import { getApiKey } from "@/utils/getApiKey";
 import { getHostname } from "@/utils/getHostname";
 
 export async function fetchWithKey<T>(url: string, type: "json" | "blob" = "json"): Promise<T> {
-  const apiKey = (await getSettings()).apiKey;
-  const response = await fetch(`${await getHostname()}${url}`, {
+  const apiKey = await getApiKey();
+  const hostname = await getHostname();
+  const response = await fetch(`${hostname}${url}`, {
     method: "GET",
     headers: {
       "X-API-Key": apiKey,
@@ -16,8 +17,9 @@ export async function fetchWithKey<T>(url: string, type: "json" | "blob" = "json
 }
 
 export async function deleteWithKey(url: string): Promise<number> {
-  const apiKey = (await getSettings()).apiKey;
-  const response = await fetch(`${await getHostname()}${url}`, {
+  const apiKey = await getApiKey();
+  const hostname = await getHostname();
+  const response = await fetch(`${hostname}${url}`, {
     method: "DELETE",
     headers: {
       "X-API-Key": apiKey,
@@ -30,8 +32,9 @@ export async function deleteWithKey(url: string): Promise<number> {
 }
 
 export async function postWithKey<T>(url: string, data: T): Promise<number> {
-  const apiKey = (await getSettings()).apiKey;
-  const response = await fetch(`${await getHostname()}${url}`, {
+  const apiKey = await getApiKey();
+  const hostname = await getHostname();
+  const response = await fetch(`${hostname}${url}`, {
     method: "POST",
     headers: {
       "X-API-Key": apiKey,
