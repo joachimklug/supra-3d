@@ -5,27 +5,25 @@ import JobStatus from "@/components/dashboard/JobStatus";
 import NozzleTemp from "@/components/dashboard/NozzleTemp";
 import { flexColumn } from "@/utils/commonStyles";
 import { cloneElement } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 
 export default function Dashboard() {
   return (
-    <ScrollView>
-      <FlatGrid
-        itemDimension={160}
-        data={[
-          <JobStatus key="JobStatus" />,
-          <JobImage key="JobImage" />,
-          <NozzleTemp key="NozzleTemp" />,
-          <BedTemp key="BedTemp" />,
-          <Axis axis="z" key="zAxis" />,
-          <Axis axis="y" key="yAxis" />,
-          <Axis axis="x" key="xAxis" />,
-        ]}
-        renderItem={({ item }) => cloneElement(item, { itemStyles: styles.item })}
-        spacing={2 * 8}
-      />
-    </ScrollView>
+    <FlatGrid
+      itemDimension={160}
+      data={[
+        <JobStatus key="JobStatus" />,
+        <JobImage key="JobImage" />,
+        <NozzleTemp key="NozzleTemp" />,
+        <BedTemp key="BedTemp" />,
+        <Axis axis="z" key="zAxis" />,
+        <Axis axis="y" key="yAxis" />,
+        <Axis axis="x" key="xAxis" />,
+      ]}
+      renderItem={({ item }) => cloneElement(item, { itemStyles: styles.item })}
+      spacing={2 * 8}
+    />
   );
 }
 
