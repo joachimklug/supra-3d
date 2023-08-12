@@ -1,18 +1,23 @@
-import { AppSettings } from "@/models/AppSettings";
-import { dummySettings, getSettings } from "@/storage/settings";
-import { useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { AppSettings, PrinterSettings } from "@/models/AppSettings";
+import { settingsState } from "@/state/settingsState";
+import { getSettings, storeSettings } from "@/storage/settings";
+import { useRecoilState } from "recoil";
 
 export const useSettings = () => {
-  const [settings, setSettings] = useState<AppSettings>();
+  const [settings, setSettings] = useRecoilState(settingsState);
 
-  const refreshSettings = useCallback(async () => setSettings(await getSettings()), []);
+  const updateSettings = async (newSettings: Partial<AppSettings>) => {
+    await storeSettings(newSettings);
+    setSettings(await getSettings());
+  };
 
-  useFocusEffect(
-    useCallback(() => {
-      refreshSettings();
-    }, []),
-  );
+  const updatePrinter = async (newPrinter: PrinterSettings[]) => {
+    await updateSettings({ printers: newPrinter });
+    if (newPrinter.some((printer) => printer.id === settings.selectedPrinter)) {
+      return;
+    }
+    await updateSettings({ selectedPrinter: newPrinter.length ? newPrinter[0].id : undefined });
+  };
 
-  return { settings: settings ?? dummySettings, refreshSettings };
+  return { settings, updateSettings, updatePrinter };
 };

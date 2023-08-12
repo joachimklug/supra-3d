@@ -2,6 +2,7 @@ import { FileFolder, FileId } from "@/models/Files";
 import { fetchFilesAndFolders } from "@/services/files";
 import { findFileLevelById, findFilesByName } from "@/utils/findFiles";
 import { isFolder } from "@/utils/isFolder";
+import { sortByName } from "@/utils/sortByName";
 import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { RefreshControl, ScrollView } from "react-native";
@@ -74,13 +75,5 @@ const sortByFolderAndName = (a: FileFolder, b: FileFolder) => {
     if (a.type === "folder") return -1;
     return 1;
   }
-  const nameA = a.display.toUpperCase();
-  const nameB = b.display.toUpperCase();
-  if (nameA < nameB) {
-    return -1;
-  }
-  if (nameA > nameB) {
-    return 1;
-  }
-  return 0;
+  return sortByName(a.display, b.display);
 };

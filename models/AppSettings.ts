@@ -1,8 +1,12 @@
+import { UUID } from "./UUID";
+
 export interface AppSettings {
-  printer: PrinterSettings[];
+  printers: PrinterSettings[];
+  selectedPrinter: UUID | undefined;
 }
 
 export interface PrinterSettings {
+  id: string;
   name: string;
   hostname: string;
   apiKey: string;

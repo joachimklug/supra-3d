@@ -1,15 +1,14 @@
-import { getApiKey } from "@/utils/getApiKey";
-import { getHostname } from "@/utils/getHostname";
+import { getActivePrinter } from "@/utils/getActivePrinter";
 
 export async function fetchWithKey<T>(url: string, type: "json" | "blob" = "json"): Promise<T> {
-  const apiKey = await getApiKey();
-  const hostname = await getHostname();
-  console.log("API", apiKey);
-  console.log("Host", hostname);
-  const response = await fetch(`${hostname}${url}`, {
+  const printer = await getActivePrinter();
+  if (!printer) {
+    return Promise.reject("No printer selected");
+  }
+  const response = await fetch(`${printer.hostname}${url}`, {
     method: "GET",
     headers: {
-      "X-API-Key": apiKey,
+      "X-API-Key": printer.apiKey,
     },
   });
   if (!response.ok) {
@@ -19,12 +18,14 @@ export async function fetchWithKey<T>(url: string, type: "json" | "blob" = "json
 }
 
 export async function deleteWithKey(url: string): Promise<number> {
-  const apiKey = await getApiKey();
-  const hostname = await getHostname();
-  const response = await fetch(`${hostname}${url}`, {
+  const printer = await getActivePrinter();
+  if (!printer) {
+    return Promise.reject("No printer selected");
+  }
+  const response = await fetch(`${printer.hostname}${url}`, {
     method: "DELETE",
     headers: {
-      "X-API-Key": apiKey,
+      "X-API-Key": printer.apiKey,
     },
   });
   if (!response.ok) {
@@ -34,12 +35,14 @@ export async function deleteWithKey(url: string): Promise<number> {
 }
 
 export async function postWithKey<T>(url: string, data: T): Promise<number> {
-  const apiKey = await getApiKey();
-  const hostname = await getHostname();
-  const response = await fetch(`${hostname}${url}`, {
+  const printer = await getActivePrinter();
+  if (!printer) {
+    return Promise.reject("No printer selected");
+  }
+  const response = await fetch(`${printer.hostname}${url}`, {
     method: "POST",
     headers: {
-      "X-API-Key": apiKey,
+      "X-API-Key": printer.apiKey,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
