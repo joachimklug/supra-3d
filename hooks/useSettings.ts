@@ -1,5 +1,5 @@
 import { AppSettings } from "@/models/AppSettings";
-import { getSettings } from "@/storage/settings";
+import { dummySettings, getSettings } from "@/storage/settings";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 
@@ -14,5 +14,5 @@ export const useSettings = () => {
     }, []),
   );
 
-  return { settings, refreshSettings };
+  return { settings: settings ?? dummySettings, refreshSettings };
 };

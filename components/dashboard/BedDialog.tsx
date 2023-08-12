@@ -59,7 +59,7 @@ export default function BedDialog({ visible, hideDialog }: Props) {
             <Dialog.Title>Bed temperature &deg;C</Dialog.Title>
             <Dialog.Content>
               <View style={flexRow}>
-                <AvoidKeyboard>
+                <AvoidKeyboard style={{ flex: 1 }}>
                   <TextInput
                     mode="outlined"
                     keyboardType="number-pad"

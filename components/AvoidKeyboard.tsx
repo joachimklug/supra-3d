@@ -1,8 +1,12 @@
 import { PropsWithChildren } from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleProp, ViewStyle } from "react-native";
 
-export const AvoidKeyboard = ({ children }: PropsWithChildren) => (
-  <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+interface Props extends PropsWithChildren {
+  style?: StyleProp<ViewStyle>;
+}
+
+export const AvoidKeyboard = ({ children, style }: Props) => (
+  <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={style}>
     {children}
   </KeyboardAvoidingView>
 );

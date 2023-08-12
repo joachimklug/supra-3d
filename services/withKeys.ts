@@ -4,6 +4,8 @@ import { getHostname } from "@/utils/getHostname";
 export async function fetchWithKey<T>(url: string, type: "json" | "blob" = "json"): Promise<T> {
   const apiKey = await getApiKey();
   const hostname = await getHostname();
+  console.log("API", apiKey);
+  console.log("Host", hostname);
   const response = await fetch(`${hostname}${url}`, {
     method: "GET",
     headers: {

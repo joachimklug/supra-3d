@@ -2,7 +2,8 @@ import { AppSettings } from "@/models/AppSettings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const key = "settings";
-const dummySettings: AppSettings = {
+
+export const dummySettings: AppSettings = {
   printer: [],
 };
 

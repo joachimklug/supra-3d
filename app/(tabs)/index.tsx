@@ -5,10 +5,11 @@ import JobStatus from "@/components/dashboard/JobStatus";
 import NozzleTemp from "@/components/dashboard/NozzleTemp";
 import { flexColumn } from "@/utils/commonStyles";
 import { cloneElement } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 
 export default function Dashboard() {
+  // AsyncStorage.clear();
   return (
     <FlatGrid
       itemDimension={160}

@@ -55,7 +55,7 @@ export default function NozzleDialog({ visible, hideDialog }: Props) {
             <Dialog.Title>Nozzle temperature &deg;C</Dialog.Title>
             <Dialog.Content>
               <View style={flexRow}>
-                <AvoidKeyboard>
+                <AvoidKeyboard style={{ flex: 1 }}>
                   <TextInput
                     mode="outlined"
                     keyboardType="number-pad"
