@@ -1,7 +1,7 @@
 import Printer from "@/components/settings/Printer";
 import { useState } from "react";
 import { ScrollView } from "react-native";
-import { List } from "react-native-paper";
+import { List, Text } from "react-native-paper";
 
 export default function Settings() {
   const [printerOpen, setPrinterOpen] = useState(true);
@@ -24,6 +24,7 @@ export default function Settings() {
         <List.Item title="First item" />
         <List.Item title="Second item" />
       </List.Accordion>
+      <Text style={{ marginLeft: "auto", padding: 2 * 8 }}>Version: {process.env.EXPO_PUBLIC_VERSION}</Text>
     </ScrollView>
   );
 }

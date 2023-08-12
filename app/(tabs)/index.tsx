@@ -9,7 +9,6 @@ import { StyleSheet } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 
 export default function Dashboard() {
-  // AsyncStorage.clear();
   return (
     <FlatGrid
       itemDimension={160}
